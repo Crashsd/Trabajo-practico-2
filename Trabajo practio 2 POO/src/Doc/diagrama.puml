@@ -1,0 +1,105 @@
+@startuml
+
+class Puerto{
+- list <Amarre> amarres
+- list <Alquiler> alquileres
++ addAmarre()
++ addAlquiler()
++ contarAmarres()
++ amarresDisponibles()
++ amarresOcupados()
++ listaAmarre()
++ alquileresRealizados()
++ alquileresEnCurso()
+}
+
+
+class Barco{
+
+-String tipoBarco
+-String matricula
+-Double eslora
+-Integer añofabricacion
+-Double tarifa
+
++getTarifa()
+}
+
+class Alquiler{
+
+-Cliente cliente
+-Barco barco
+-Amarre amarre
+-Integer diaInicial
+-Integer diaFinal
+-Boolean estado
+
++iniciarAlquiler()----->amarre.ocupar()
++terminarAlquiler()--->amaare.desocupar() setDiaFinal()
++obtenerTotal()
+}
+
+
+class Amarre{
+-Integer id
+-Integer posicion
+-Boolean estado
+
+
++ocuparAmarre()
++desocuparAmarre()
+
+}
+
+class Cliente{
+
+-String nombre;
+-String apellido;
+-Integer dni;
+
+
+}
+
+interface TipoAnfibio{
++cantidadRuedas()
++velocidad()
+}
+
+class Velero extends Barco{
++getTarifa()
+}
+
+class MotoAcuatica extends Barco {
++getTarifa()
+}
+class Lancha extends Barco{
++getTarifa()
+}
+
+class Yate extends Barco{
++getTarifa()
+}
+
+class Catamaran extends Barco{
++getTarifa()
+
+}
+
+class Anfibio extends Barco implements TipoAnfibio{
+
+-Integer velocidad
+-Integer cantidadRuedas
+
++getTarifa()
++cantidadRuedas()
++velocidad()
+
+}
+
+Puerto <|-- Amarre
+Puerto <|-- Alquiler
+Alquiler <|-- Barco
+Alquiler <|-- Amarre
+Alquiler <|-- Cliente
+
+@enduml
